@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Cinephile</title>
+</head>
+<body>
+
+    <header>Cinéphile</header>
+
+    <section id="contenedor">
+        <input type="text" v-model="busqueda" placeholder="Buscar película...">
+        <ul>
+            <li v-for="pelicula in buscarPelicula" :key="pelicula.id">
+                {{ pelicula.title }}
+            </li>
+        </ul>
+
+        <p>Total de películas encontradas: {{ pelisEncontrados }}</p>
+        <div class="progress">
+            <div 
+                class="progress-bar" 
+                :class="color" 
+                role="progressbar" 
+                :style="{ width: porcentaje + '%' }" 
+                aria-valuenow="porcentaje" 
+                aria-valuemin="0" 
+                aria-valuemax="100">
+                {{ porcentaje }}%
+            </div>
+        </div>
+
+        <div>
+            <button @click="LLamarTendencia">Tendencias</button>
+            <div v-if="mostrarTendencias">
+                <div v-for="tendencia in pelicula" :key="tendencia.id">
+                    <p><strong>Title:</strong> {{ tendencia.title }}</p>
+                    <img :src="`https://image.tmdb.org/t/p/w500${tendencia.poster_path}`" alt="poster">
+                    <p><strong>Date:</strong> {{ tendencia.release_date }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button @click="LLamarPopular">Popular</button>
+            <div v-if="mostrarPopular">
+                <div v-for="popular in pelicula" :key="popular.id">
+                    <p><strong>Title:</strong> {{ popular.title }}</p>
+                    <img :src="`https://image.tmdb.org/t/p/w500${popular.poster_path}`" alt="poster">
+                    <p><strong>Date:</strong> {{ popular.release_date }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button @click="LLamarPuntuada">Mejor Puntuadas</button>
+            <div v-if="mostrarPuntuacion">
+                <div v-for="punto in pelicula" :key="punto.id">
+                    <p><strong>Title:</strong> {{ punto.title }}</p>
+                    <img :src="`https://image.tmdb.org/t/p/w500${punto.poster_path}`" alt="poster">
+                    <p><strong>Date:</strong> {{ punto.release_date }}</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="js/vue3.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
+
+
