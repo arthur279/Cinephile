@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Carrito de Películas</title>
+</head>
+<body>
+    <section id="carrito">
+        <h2>Carrito de Películas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Película</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in carrito" :key="item.id">
+                    <td>{{ item.title }}</td>
+                    <td>
+                        <button @click="modificarCantidad(index, 1)" :disabled="item.cantidad >= 10">+</button>
+                        <input type="number" v-model.number="item.cantidad" min="1" max="10">
+                        <button @click="modificarCantidad(index, -1)" :disabled="item.cantidad <= 1">-</button>
+                    </td>
+                    <td>$50</td>
+                    <td>{{ item.cantidad * 50 }}</td>
+                    <td><button @click="eliminarDelCarrito(index)">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Total: ${{ totalCarrito }}</h3>
+        <button @click="comprar">Comprar</button>
+    </section>
+
+    <script src="js/vue3.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/Carrito.js"></script>
+</body>
+</html>
+
