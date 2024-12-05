@@ -21,35 +21,23 @@
         <input type="text" v-model="busqueda" placeholder="Buscar película...">
         <p>Total de películas encontradas: {{ pelisEncontrados }}</p>
         <div class="progress">
-            <div 
-                class="progress-bar" 
-                :class="color" 
-                role="progressbar" 
-                :style="{ width: porcentaje + '%' }" 
-                aria-valuenow="porcentaje" 
-                aria-valuemin="0" 
-                aria-valuemax="100">
-                {{ porcentaje }}%
-            </div>
+            <div class="progress-bar" :class="color" role="progressbar" :style="{ width: porcentaje + '%' }" aria-valuenow="porcentaje" aria-valuemin="0" aria-valuemax="100">{{ porcentaje }}%</div>
         </div>
-
         <div class="row">
             <div class="col-md-4" v-for="pelicula in peliculasFiltradas" :key="pelicula.id">
                 <div class="card mb-4">
-                    <img :src="`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`" class="card-img-top" alt="poster">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ pelicula.title }}</h5>
-                        <p class="card-text">Fecha: {{ pelicula.release_date }}</p>
-                        <p class="card-text">Precio: $50</p>
-                        <button @click="agregarCarrito(pelicula)" class="btn btn-danger">Agregar</button>
-                    </div>
+                    <img :src="`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`" class="card-img-top" alt="poster" @click="verDetalle(pelicula)">
+                    <h5 class="card-title">{{ pelicula.title }}</h5>
+                    <p class="card-text">Fecha: {{ pelicula.release_date }}</p>
+                    <p>Precio: ${{ pelicula.precio }}</p>
+                    <button @click="agregarCarrito(pelicula)">Agregar al carrito</button>
                 </div>
             </div>
         </div>
     </section>
-
     <script src="js/vue3.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
+

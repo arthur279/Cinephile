@@ -41,6 +41,9 @@ input[type="text"] {
 .progress {
     margin: 20px 0;
 }
+img {
+    cursor: pointer;
+}
 
 
 

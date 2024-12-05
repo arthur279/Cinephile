@@ -1,0 +1,139 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+#detalleApp {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+nav {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007BFF;
+    margin-right: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #e2e6ea; /* Color suave en el hover */
+    color: #0056b3;
+}
+
+/* Detalle de la película */
+.detalle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: flex-start; /* Alinea los elementos al principio */
+    margin-top: 20px;
+}
+
+.detalle img {
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.detalle div {
+    max-width: 600px;
+    margin-left: 20px; /* Añadir separación entre imagen y texto */
+}
+
+.detalle h1 {
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+    font-weight: bold;
+    text-align: left; /* Título alineado a la izquierda */
+}
+
+.detalle p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.detalle p:first-of-type {
+    font-weight: bold;
+}
+
+/* Estilos del botón */
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+    margin-left: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 8px 16px rgba(0, 123, 255, 0.4);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+button:active {
+    background-color: #004085;
+    transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
+    .detalle {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .detalle img {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .detalle h1 {
+        text-align: center;
+    }
+
+    .detalle p {
+        text-align: center;
+    }
+
+    button {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    nav a {
+        margin-right: 20px;
+        padding: 10px;
+    }
+}
+

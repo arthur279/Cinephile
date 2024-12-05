@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/Detalles.css">
+    <title>Detalle del Producto</title>
+</head>
+<body>
+    <div id="detalleApp">
+        <nav>
+            <a href="index.html" @click="irAInicio">Inicio</a> > {{ producto?.title || 'Detalle' }}
+            <a href="Carrito.html" >Carrito</a> >
+        </nav>
+        <div v-if="producto" class="detalle">
+            <img :src="`https://image.tmdb.org/t/p/w500${producto.poster_path}`" alt="Poster" />
+            <h1>{{ producto.title }}</h1>
+            <p>{{ producto.overview }}</p>
+            <p>Categoría: Película</p>
+            <p>Precio: ${{ producto.precio }}</p>
+            <button @click="agregarAlCarrito">Agregar al carrito</button>
+        </div>
+    </div>
+    <script src="js/vue3.js"></script>
+    <script src="js/Detalles.js"></script>
+</body>
+</html>
+

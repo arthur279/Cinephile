@@ -5,45 +5,24 @@ const appCarrito = Vue.createApp({
         };
     },
     mounted() {
-    
         const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
         this.carrito = carritoGuardado;
     },
     methods: {
         modificarCantidad(index, delta) {
             let carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-
-          
             carritoGuardado[index].cantidad += delta;
-
             if (carritoGuardado[index].cantidad <= 0) {
                 carritoGuardado.splice(index, 1);
             }
-
-         
             localStorage.setItem('carrito', JSON.stringify(carritoGuardado));
-
-           
             this.carrito = carritoGuardado;
         },
         eliminarDelCarrito(index) {
             let carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-
-           
             carritoGuardado.splice(index, 1);
-
-          
             localStorage.setItem('carrito', JSON.stringify(carritoGuardado));
-
-          
             this.carrito = carritoGuardado;
-        },
-        comprar() {
-            alert("¡Gracias por tu compra!");
-            this.carrito = [];
-
-            
-            localStorage.removeItem('carrito');
         },
     },
     computed: {
@@ -52,7 +31,4 @@ const appCarrito = Vue.createApp({
         },
     },
 });
-
 appCarrito.mount('#carrito');
-
-

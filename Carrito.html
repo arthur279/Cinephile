@@ -24,12 +24,12 @@
                 <tr v-for="(item, index) in carrito" :key="item.id">
                     <td>{{ item.title }}</td>
                     <td>
-                        <button @click="modificarCantidad(index, 1)" :disabled="item.cantidad >= 10">+</button>
-                        <input type="number" v-model.number="item.cantidad" min="1" max="10">
+                        <button @click="modificarCantidad(index, 1)" :disabled="item.cantidad >= 6">+</button>
+                        <input type="number" v-model.number="item.cantidad" min="1" max="6">
                         <button @click="modificarCantidad(index, -1)" :disabled="item.cantidad <= 1">-</button>
                     </td>
-                    <td>$50</td>
-                    <td>{{ item.cantidad * 50 }}</td>
+                    <td>${{ item.precio.toFixed(2) }}</td>
+                    <td>${{ (item.cantidad * item.precio).toFixed(2) }}</td>
                     <td><button @click="eliminarDelCarrito(index)">Eliminar</button></td>
                 </tr>
             </tbody>
