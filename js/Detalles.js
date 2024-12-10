@@ -76,7 +76,7 @@ const appDetalle = Vue.createApp({
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Redirige al usuario al carrito
-                    window.location.href = 'carrito.html';
+                    window.location.href = 'Carrito.html';
                 }
             });
         },
