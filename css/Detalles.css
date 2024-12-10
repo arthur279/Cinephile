@@ -1,139 +1,162 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra para mayor separación visual */
+    padding: 10px 20px; /* Espaciado interno */
+    z-index: 10; /* Sobre el fondo */
+    position: relative; /* Para evitar que quede detrás del fondo */
 }
 
-#detalleApp {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+.navbar-brand {
+    font-size: 1.5rem; /* Tamaño más grande para resaltar */
+    font-weight: bold;
 }
 
-nav {
-    font-size: 16px;
-    margin-bottom: 20px;
+.navbar-text {
+    color: #ddd; /* Color más suave para texto */
+    font-size: 1rem;
 }
 
-nav a {
-    text-decoration: none;
-    color: #007BFF;
-    margin-right: 10px;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+.btn-outline-light {
+    border-color: #ffffff;
+    color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-nav a:hover {
-    background-color: #e2e6ea; /* Color suave en el hover */
-    color: #0056b3;
-}
-
-/* Detalle de la película */
-.detalle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.btn-outline-light:hover {
     background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    align-items: flex-start; /* Alinea los elementos al principio */
-    margin-top: 20px;
+    color: #000000;
 }
-
-.detalle img {
-    max-width: 300px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.detalle div {
-    max-width: 600px;
-    margin-left: 20px; /* Añadir separación entre imagen y texto */
-}
-
-.detalle h1 {
-    font-size: 28px;
-    color: #333;
-    margin: 0;
-    font-weight: bold;
-    text-align: left; /* Título alineado a la izquierda */
-}
-
-.detalle p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #555;
-}
-
-.detalle p:first-of-type {
-    font-weight: bold;
-}
-
-/* Estilos del botón */
-button {
-    background-color: #007BFF;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 50px;
+.carrito-icon {
+    width: 24px; /* Ajusta el tamaño del ícono */
+    height: auto;
+    margin-left: 20px; /* Espaciado a la izquierda del carrito, si es necesario */
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-    margin-left: 20px;
 }
 
-button:hover {
-    background-color: #0056b3;
-    box-shadow: 0 8px 16px rgba(0, 123, 255, 0.4);
+
+.btn-agregar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+.backdrop-parallax {
+    position: fixed; /* Posición fija para cubrir toda la ventana */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Asegurarse de que la imagen cubra el área */
+    background-position: center; /* Centrar la imagen */
+    z-index: -1; /* Mantener el fondo detrás de otros elementos */
+    transition: transform 0.1s; /* Suavizar la transición del movimiento */
 }
 
-button:active {
-    background-color: #004085;
-    transform: scale(0.98);
+/* Ajustes del contenido */
+.detalle-contenedor {
+   
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    margin: 50px auto; /* Centrado vertical y horizontal */
+    max-width: 800px; /* Ancho máximo */
+}
+.detalle-contenedor {
+    background: linear-gradient(to bottom right, rgba(50, 0, 100, 0.8), rgba(0, 0, 50, 0.8)); /* Degradado transparente */
+    padding: 20px; /* Espacio interno */
+    color: white; /* Color del texto */
 }
 
-@media (max-width: 768px) {
-    .detalle {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .detalle img {
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .detalle h1 {
-        text-align: center;
-    }
-
-    .detalle p {
-        text-align: center;
-    }
-
-    button {
-        margin-left: 0;
-        margin-top: 20px;
-    }
-
-    nav a {
-        margin-right: 20px;
-        padding: 10px;
-    }
+/* Estilo del botón */
+.btn-agregar {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #7f00ff, #1e90ff); /* Degradado */
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
 }
+
+.btn-agregar:hover {
+    background: linear-gradient(45deg, #1e90ff, #7f00ff); /* Invertir degradado */
+}
+
+.detalle-flex {
+    display: flex; /* Usar flexbox para alinear elementos horizontalmente */
+    align-items: flex-start; /* Alinear elementos al inicio */
+    margin: 20px; /* Espacio alrededor del contenedor */
+}
+
+.detalle-info {
+    margin-left: 20px; /* Espacio entre el poster y la información */
+    max-width: 600px; /* Ancho máximo para la información */
+}
+
+.poster {
+    max-width: 200px; /* Ajustar el tamaño del poster */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra suave */
+}
+
+.casa-icon {
+    width: 30px; /* Ajusta el tamaño del icono */
+    height: 30px; /* Asegura que tenga la misma altura */
+    margin-left: 10px; /* Espacio a la izquierda del texto */
+    transition: transform 0.2s ease; /* Transición suave para el efecto hover */
+}
+
+.casa-icon:hover {
+    transform: scale(1.1); /* Aumenta el tamaño ligeramente al pasar el mouse */
+}
+
+.navbar .navbar-brand {
+    display: flex; /* Permite alinear el icono y el texto en una línea */
+    align-items: center; /* Centra verticalmente el icono y el texto */
+}
+
+.swal-dark-popup {
+    background-color: #333 !important; /* Fondo oscuro */
+    color: #fff !important; /* Texto blanco */
+    border: 1px solid #444; /* Borde oscuro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+.swal-dark-title {
+    color: #fff !important; /* Título en blanco */
+}
+
+.swal-dark-content {
+    color: #ddd !important; /* Texto del contenido */
+}
+
+.swal-dark-button {
+    background: linear-gradient(to right, #4c6ef5, #b06ab8); /* Botón con degradado */
+    color: #fff !important; /* Texto blanco */
+    border: none !important; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado */
+    cursor: pointer;
+}
+
+.swal-dark-button:hover {
+    background: linear-gradient(to right, #2a5bdb, #a05b9d); /* Cambio de color al pasar el mouse */
+}
+
+.swal-dark-cancel-button {
+    background: #444; /* Botón cancelar con fondo oscuro */
+    color: #fff !important; /* Texto blanco */
+    border: none !important; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado */
+    cursor: pointer;
+}
+
+.swal-dark-cancel-button:hover {
+    background: #555; /* Fondo más claro al pasar el mouse */
+}
+
+
+
+
+
 

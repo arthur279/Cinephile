@@ -5,25 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/Detalles.css">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark/dark.css" rel="stylesheet">
     <title>Detalle del Producto</title>
 </head>
 <body>
     <div id="detalleApp">
-        <nav>
-            <a href="index.html" @click="irAInicio">Inicio</a> > {{ producto?.title || 'Detalle' }}
-            <a href="Carrito.html" >Carrito</a> >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a href="index.html" @click="irAInicio">
+                <img src="img/hogar.png" alt="Casa" class="casa-icon">
+            </a>
+                <span class="navbar-text">{{ producto?.title || 'Detalle' }}</span>
+                <a href="Carrito.html">
+                    <img src="img/carrito-de-compras.png" alt="Carrito" class="carrito-icon">
+                </a>  
+            </div>
         </nav>
-        <div v-if="producto" class="detalle">
-            <img :src="`https://image.tmdb.org/t/p/w500${producto.poster_path}`" alt="Poster" />
-            <h1>{{ producto.title }}</h1>
-            <p>{{ producto.overview }}</p>
-            <p>Categoría: Película</p>
-            <p>Precio: ${{ producto.precio }}</p>
-            <button @click="agregarAlCarrito">Agregar al carrito</button>
-        </div>
+        
+        <div v-if="producto" class="backdrop-parallax" :style="{ backgroundImage: `url(https://image.tmdb.org/t/p/original${producto.backdrop_path})` }"></div>
+
+        <section v-if="producto" class="detalle-contenedor">
+            <div class="detalle-flex">
+                <img :src="`https://image.tmdb.org/t/p/w500${producto.poster_path}`" alt="Poster" class="poster" />
+                <div class="detalle-info">
+                    <h1>{{ producto.title }}</h1>
+                    <p>Descripción: {{ producto.overview }}</p>
+                    <p>Precio: ${{ producto.precio }}</p>
+                    <button @click="agregarAlCarrito" class="btn-agregar">Agregar al carrito</button>
+                </div>
+            </div>
+        </section>
+    </div>
     </div>
     <script src="js/vue3.js"></script>
     <script src="js/Detalles.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
 

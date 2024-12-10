@@ -1,49 +1,324 @@
 body {
-    background-color: #f4f4f4;
-}
-
-#contenedor {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    background-color: #121212; /* Fondo oscuro */
+    color: #FFFFFF; /* Texto principal */
+    font-family: Arial, sans-serif;
 }
 
 header {
+    background-color: #1E1E1E;
+    color: #FFD700; /* Títulos en oro */
+    padding: 20px;
     text-align: center;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    font-size: 2.5em;
-    margin: 0;
-}
-
-header a {
-    text-decoration: none;
-    color: #333;
-    font-size: 1.2em;
-    margin-top: 10px;
-    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 button {
-    margin: 5px;
-}
-
-input[type="text"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
+    background-color: #E50914; /* Botones rojos estilo Netflix */
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-.progress {
-    margin: 20px 0;
+button:hover {
+    background-color: #FF1E1E; /* Hover más brillante */
 }
-img {
+
+.card {
+    background-color: #232323; /* Fondo de las tarjetas */
+    border: 1px solid #333333; /* Bordes claros */
+    border-radius: 10px;
+    padding: 15px;
+    color: #CCCCCC; /* Texto de las tarjetas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+.carrito-icon {
+    width: 24px; /* Ajusta según el diseño */
+    height: auto;
+    vertical-align: middle; /* Centra con el texto */
     cursor: pointer;
 }
 
+.nav-link {
+    font-size: 1.1rem; /* Aumenta el tamaño de la letra */
+    margin-right: 20px; /* Espaciado a la derecha para separar del carrito */
+}
+
+.carrito-icon {
+    width: 24px; /* Ajusta el tamaño del ícono */
+    height: auto;
+    margin-left: 20px; /* Espaciado a la izquierda del carrito, si es necesario */
+    cursor: pointer;
+}
+
+#header {
+    position: relative;
+    height: 450px; /* Altura del header */
+    overflow: hidden; /* Oculta cualquier contenido que sobresalga del contenedor */
+    background-color: #000; /* Fondo negro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+    z-index: 2; /* Justo detrás del texto */
+}
+#header h1 {
+    font-size: 5rem; /* Tamaño de fuente del título */
+    position: absolute;
+    color: transparent; /* Color transparente para permitir el degradado */
+    background: linear-gradient(45deg, #800080, #0000FF); /* Degradado de morado a azul */
+    -webkit-background-clip: text; /* Clipping del fondo para el texto */
+    background-clip: text; /* Clipping del fondo para el texto */
+    padding: 10px 20px; /* Espaciado alrededor del texto */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra del texto */
+}
+#header h2.slogan {
+    font-size: 1.5rem; /* Tamaño de fuente del subtítulo */
+    position: absolute;
+    color: transparent; /* Color transparente para permitir el degradado */
+    background: linear-gradient(45deg, #800080, #0000FF); /* Degradado de morado a azul */
+    -webkit-background-clip: text; /* Clipping del fondo para el texto */
+    background-clip: text; /* Clipping del fondo para el texto */
+    padding: 5px 10px; /* Espaciado alrededor del texto */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Sombra del texto */
+    margin-top: 180px; /* Margen superior para separar el título del subtítulo */
+}
+#header h1, #header h2.slogan {
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Corrige el desplazamiento al centro */
+    z-index: 3; /* Asegura que el texto esté por encima de las imágenes */
+    text-align: center; /* Centra el texto */
+    color: #FFFFFF; /* Color del texto */
+    
+    /* Efecto de resplandor */
+    text-shadow: 
+        0 0 5px rgba(0, 0, 255, 0.7), /* Resplandor azul */
+        0 0 10px rgba(0, 0, 255, 0.5), /* Resplandor azul más difuso */
+        0 0 15px rgba(255, 0, 255, 0.3); /* Resplandor morado */
+}
+
+.movie-row {
+    width: 100%;
+    overflow: hidden; /* Oculta las imágenes que están fuera de la vista */
+    position: absolute; /* Permite que se superponga sin afectar el flujo del documento */
+    bottom: 0; /* Asegura que la fila de películas esté en la parte inferior del header */
+}
+
+.movie-container {
+    display: flex;
+    animation: scroll-right 30s linear infinite; /* Animación continua */
+    height: 100%; /* Asegura que el contenedor ocupe toda la altura del header */
+}
+
+@keyframes scroll-right {
+    0% {
+        transform: translateX(0); /* Comienza desde la posición inicial */
+    }
+    100% {
+        transform: translateX(-100%); /* Se desplaza completamente a la izquierda */
+    }
+}
+
+.movie-container img {
+    height: 100%; /* Ajusta la altura de las imágenes para que ocupen todo el contenedor */
+    width: auto; /* Mantiene la relación de aspecto */
+    min-width: 310px; /* Establece un ancho mínimo para las imágenes */
+    max-width: 360px; /* Establece un ancho máximo para las imágenes */
+    object-fit: cover; /* Permite que las imágenes se recorten correctamente para llenar el espacio */
+    margin: 0; /* Sin margen entre imágenes */
+}
+#peliculas {
+    position: relative;
+    overflow: hidden; /* Oculta el desbordamiento del contenedor */
+}
+
+.peliculas-container {
+    display: flex;
+    overflow-x: auto; /* Permite desplazamiento horizontal */
+    scroll-behavior: smooth; /* Suaviza el desplazamiento */
+    padding: 20px; /* Espacio interno */
+}
+
+.peliculas-wrapper {
+    display: flex; /* Coloca las tarjetas en línea */
+}
+
+.pelicula-card {
+    flex: 0 0 auto; /* Previene que las tarjetas se redimensionen */
+    width: 250px;
+    margin-right: 15px; /* Espacio entre tarjetas */
+    transition: transform 0.3s; /* Efecto al pasar el mouse */
+    text-align: center; /* Centra el texto */
+}
+
+.pelicula-card img {
+    width: 100%; /* Hace que la imagen ocupe todo el espacio de la tarjeta */
+    border-radius: 5px; /* Bordes redondeados */
+    object-fit: cover;
+}
+
+.pelicula-card button {
+    background: linear-gradient(135deg, #6a5acd, #1e90ff); /* Degradado de morado a azul */
+    color: #fff; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 8px 12px; /* Espaciado interno */
+    margin-top: 10px; /* Margen superior */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background-color 0.3s, transform 0.3s; /* Efecto de transición */
+}
+
+.pelicula-card button:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+    background: linear-gradient(135deg, #5b4bd8, #1a7ec7); /* Degradado más oscuro al pasar el mouse */
+}
+
+
+.pelicula-card:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+.seccion-tendencias {
+    text-align: center; /* Centra el contenido */
+    margin: 40px 0; /* Espacio entre el header y las tarjetas */
+}
+
+.tendencias-buttons {
+    margin-bottom: 20px; /* Espacio entre los botones y la barra de búsqueda */
+    display: flex; /* Usa flexbox para alinear los elementos */
+    justify-content: center; /* Centra los elementos en la fila */
+    align-items: center; /* Alinea verticalmente los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan si es necesario */
+    font-size: 16px; /* Tamaño de fuente más pequeño */
+    padding: 10px 15px; /* Relleno reducido */
+    margin-right: 10px; /* Espacio entre los botones */
+}
+
+button {
+    background: linear-gradient(90deg, #6a0dad, #1e90ff); /* Degradado azul y morado */
+    color: white; /* Color del texto */
+    border: none;
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 10px 15px; /* Espaciado interno */
+    margin: 0 10px; /* Espacio entre botones */
+    cursor: pointer;
+    transition: background 0.3s; /* Efecto de transición */
+}
+
+button:hover {
+    background: linear-gradient(90deg, #1e90ff, #6a0dad); /* Cambia el degradado al pasar el mouse */
+}
+
+.busqueda-container {
+    position: relative; /* Posiciona el contenedor de búsqueda */
+    display: flex; /* Usa flexbox para alinear elementos */
+    align-items: center; /* Centra verticalmente */
+    margin-top: 10px; /* Espacio superior para separar de los botones */
+}
+
+.busqueda-input {
+    border: 2px solid #6a0dad; /* Borde morado */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 10px 35px 10px 15px; /* Espaciado interno reducido */
+    width: 200px; /* Ancho específico reducido para hacer la barra más pequeña */
+    font-size: 14px; /* Ajustar el tamaño de la fuente */
+    margin-left: 10px; /* Espacio a la izquierda del input de género */
+}
+
+.busqueda-icon {
+    position: absolute; /* Posiciona el ícono de búsqueda */
+    right: 10px; /* Espacio desde el lado derecho */
+    width: 16px; /* Ajusta el tamaño del ícono */
+    height: 16px; /* Ajusta el tamaño del ícono */
+    opacity: 0.5; /* Hace el ícono más transparente */
+    pointer-events: none; /* Ignora eventos de puntero en el ícono */
+}
+
+
+
+
+.progress {
+    margin-top: 20px; /* Espacio superior */
+    width: 80%; /* Ancho de la barra de progreso */
+    margin: 0 auto; /* Centra la barra de progreso */
+}
+
+.progress-bar {
+    height: 20px; /* Altura de la barra de progreso */
+}
+
+.casa-icon {
+    width: 30px; /* Ajusta el tamaño del icono */
+    height: 30px; /* Asegura que tenga la misma altura */
+    margin-left: 10px; /* Espacio a la izquierda del texto */
+    transition: transform 0.2s ease; /* Transición suave para el efecto hover */
+}
+
+.casa-icon:hover {
+    transform: scale(1.1); /* Aumenta el tamaño ligeramente al pasar el mouse */
+}
+
+.navbar .navbar-brand {
+    display: flex; /* Permite alinear el icono y el texto en una línea */
+    align-items: center; /* Centra verticalmente el icono y el texto */
+}
+/* Estilos generales del SweetAlert */
+.swal-dark-popup {
+    background-color: #333 !important; /* Fondo oscuro */
+    color: #fff !important; /* Texto blanco */
+    border: 1px solid #444; /* Borde oscuro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+.swal-dark-title {
+    color: #fff !important; /* Título en blanco */
+}
+
+.swal-dark-content {
+    color: #ddd !important; /* Texto del contenido */
+}
+
+.swal-dark-button {
+    background: linear-gradient(to right, #4c6ef5, #b06ab8); /* Botón con degradado */
+    color: #fff !important; /* Texto blanco */
+    border: none !important; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado */
+    cursor: pointer;
+}
+
+.swal-dark-button:hover {
+    background: linear-gradient(to right, #2a5bdb, #a05b9d); /* Cambio de color al pasar el mouse */
+}
+
+.swal-dark-cancel-button {
+    background: #444; /* Botón cancelar con fondo oscuro */
+    color: #fff !important; /* Texto blanco */
+    border: none !important; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado */
+    cursor: pointer;
+}
+
+.swal-dark-cancel-button:hover {
+    background: #555; /* Fondo más claro al pasar el mouse */
+}
 
 
