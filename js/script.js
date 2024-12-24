@@ -23,6 +23,9 @@ const app = Vue.createApp({
             carrito: [],
             generos: [], 
             persona:[],
+            modalVisible: false,
+            personaSeleccionada: null, // Persona seleccionada para el modal
+            mostrarMas: false, // Controla si se expande la sección
         };
     },
     methods: {
@@ -86,7 +89,8 @@ const app = Vue.createApp({
             const URL = `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}`;
             axios.get(URL)
                  .then((respuesta) => {
-                    this.persona = respuesta.data.results;  
+                    this.persona = respuesta.data.results.splice(0,18);;  
+                    console.log(respuesta.data.results)
                  })
         },
         obtenerGeneros() {
@@ -96,7 +100,6 @@ const app = Vue.createApp({
             axios.get(URL)
                 .then((respuesta) => {
                     this.generos = respuesta.data.genres; 
-                    console.log('Géneros cargados:', this.generos);
                 })
                 .catch((error) => {
                     console.error('Error al cargar géneros:', error);
@@ -127,7 +130,6 @@ const app = Vue.createApp({
             );
         },
         agregarCarrito(pelicula) {
-            // Primera alerta para confirmar la acción
             Swal.fire({
                 title: `¿Quieres agregar "${pelicula.title}" al carrito?`,
                 text: `Precio: $${pelicula.precio}`,
@@ -201,16 +203,23 @@ const app = Vue.createApp({
                     });
                 }
             });
-        },
-        
-        
-        
-        
+        },   
         verDetalle(pelicula) {
             localStorage.setItem('productoSeleccionado', JSON.stringify(pelicula));
             localStorage.setItem('posicionScroll', window.scrollY);
             window.location.href = 'Detalles.html';
-        }
+        },
+        abrirModal(persona) {
+            this.personaSeleccionada = persona;
+            this.modalVisible = true;
+          },
+          cerrarModal() {
+            this.modalVisible = false;
+            this.personaSeleccionada = null;
+          },
+          toggleVerMas() {
+            this.mostrarMas = !this.mostrarMas;
+          },
     },
     watch: {
         busqueda() {

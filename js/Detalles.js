@@ -89,7 +89,6 @@ const appDetalle = Vue.createApp({
         }
     },
         beforeDestroy() {
-        // Remover el evento para evitar fugas de memoria
         window.removeEventListener('mousemove', this.handleMouseMove);
     }
 });

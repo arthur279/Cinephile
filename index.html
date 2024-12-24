@@ -10,77 +10,98 @@
     <title>Cinéphile</title>
 </head>
 <body>
-    <section id="contenedor">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center">
-                       Cinéphile
-                </a>                 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>               
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contacto</a>
-                        </li>
-                    </ul>
-                    <a href="index.html">
-                        <img src="img/hogar.png" alt="Casa" class="casa-icon">
-                    </a>
-                    <a href="Carrito.html">
-                        <img src="img/carrito-de-compras.png" alt="Carrito" class="carrito-icon">
-                    </a>   
-                </div>
-            </div>
-        </nav>
-        <header id="header">
-            <h1>Cinéphile</h1> 
-            <h2 class="slogan">Tu destino para las mejores películas</h2>
-            <div class="movie-row">
-                <div class="movie-container">
-                    <img v-for="peliculas in pelicula" :key="pelicula.id" :src="`https://image.tmdb.org/t/p/w500${peliculas.poster_path}`" alt="Poster de {{ pelicula.title }}">
-                </div>
-            </div>
-        </header>   
-        <div class="seccion-tendencias">
-            <div class="tendencias-buttons">
-                <button @click="LLamarTendencia">Tendencias</button>
-                <button @click="LLamarPopular">Popular</button>
-                <button @click="LLamarPuntuada">Mejor Puntuadas</button>
-                <label for="generos">Seleccionar Género:</label>
-                <select id="generos" v-model="generoSeleccionado" @change="LLamarPorGenero" class="genero-select">
-                    <option v-for="genero in generos" :value="genero.id" :key="genero.id">
-                        {{ genero.name }}
-                    </option>
-                </select>             
-                <div class="busqueda-container">
-                    <input type="text" v-model="busqueda" placeholder="Buscar película..." class="busqueda-input">
-                    <img src="img/lupa-de-busqueda.png" alt="Buscar" class="busqueda-icon">
-                </div>             
-            </div>
-            <p>Total de películas encontradas: {{ pelisEncontrados }}</p>    
-            <div class="progress">
-                <div class="progress-bar" :class="color" role="progressbar" :style="{ width: porcentaje + '%' }" aria-valuenow="porcentaje" aria-valuemin="0" aria-valuemax="100">{{ porcentaje }}%</div>
+<section id="contenedor">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center">Cinéphile</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                </ul>
+                <a href="index.html">
+                    <img src="img/hogar.png" alt="Casa" class="casa-icon">
+                </a>
+                <a href="Carrito.html">
+                    <img src="img/carrito-de-compras.png" alt="Carrito" class="carrito-icon">
+                </a>
             </div>
         </div>
-        <section id="peliculas">
-            <div class="peliculas-container">
-                <div class="peliculas-wrapper">
-                    <div class="pelicula-card" v-for="pelicula in peliculasFiltradas" :key="pelicula.id">
-                        <img :src="`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`" alt="poster" @click="verDetalle(pelicula)">
-                        <h5>{{ pelicula.title }}</h5>
-                        <p>Fecha: {{ pelicula.release_date }}</p>
-                        <p>Precio: ${{ pelicula.precio }}</p>
-                        <button @click="agregarCarrito(pelicula)">Agregar al carrito</button> 
-                    </div>
+    </nav>
+    <header id="header">
+        <h1>Cinéphile</h1>
+        <h2 class="slogan">Tu destino para las mejores películas</h2>
+        <div class="movie-row">
+            <div class="movie-container">
+                <img v-for="peliculas in pelicula" :key="pelicula.id" :src="`https://image.tmdb.org/t/p/w500${peliculas.poster_path}`" alt="Poster de {{ pelicula.title }}">
+            </div>
+        </div>
+    </header>
+    <div class="seccion-tendencias">
+        <div class="tendencias-buttons">
+            <button @click="LLamarTendencia">Tendencias</button>
+            <button @click="LLamarPopular">Popular</button>
+            <button @click="LLamarPuntuada">Mejor Puntuadas</button>
+            <label for="generos">Seleccionar Género:</label>
+            <select id="generos" v-model="generoSeleccionado" @change="LLamarPorGenero" class="genero-select">
+                <option v-for="genero in generos" :value="genero.id" :key="genero.id">{{ genero.name }}</option>
+            </select>
+            <div class="busqueda-container">
+                <input type="text" v-model="busqueda" placeholder="Buscar película..." class="busqueda-input">
+                <img src="img/lupa-de-busqueda.png" alt="Buscar" class="busqueda-icon">
+            </div>
+        </div>
+        <p>Total de películas encontradas: {{ pelisEncontrados }}</p>
+        <div class="progress">
+            <div class="progress-bar" :class="color" role="progressbar" :style="{ width: porcentaje + '%' }" aria-valuenow="porcentaje" aria-valuemin="0" aria-valuemax="100">{{ porcentaje }}%</div>
+        </div>
+    </div>
+    <section id="peliculas">
+        <div class="peliculas-container">
+            <div class="peliculas-wrapper">
+                <div class="pelicula-card" v-for="pelicula in peliculasFiltradas" :key="pelicula.id">
+                    <img :src="`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`" alt="poster" @click="verDetalle(pelicula)">
+                    <h5>{{ pelicula.title }}</h5>
+                    <p>Fecha: {{ pelicula.release_date }}</p>
+                    <p>Precio: ${{ pelicula.precio }}</p>
+                    <button @click="agregarCarrito(pelicula)">Agregar al carrito</button>
                 </div>
             </div>
-        </section> 
+        </div>
     </section>
-    <script src="js/vue3.js"></script>
-    <script src="js/axios.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <section id="personas" class="personas-populares">
+        <h2 class="section-title">Personas Populares</h2>
+        <p class="section-subtitle">Actores y actrices destacados del momento</p>
+        <div class="grid-container" :class="{ 'expand': mostrarMas }">
+            <div class="card" v-for="persona in persona" :key="persona.id">
+                <img :src="'https://image.tmdb.org/t/p/w200' + persona.profile_path" alt="Foto de {{ persona.name }}" class="profile-pic">
+                <h3 class="person-name">{{ persona.name }}</h3>
+                <button @click="abrirModal(persona)" class="details-button">Ver detalles</button>
+            </div>
+        </div>
+        <div class="toggle-button-container">
+            <button class="toggle-button" @click="toggleVerMas">{{ mostrarMas ? 'Ver menos' : 'Ver más' }}</button>
+        </div>
+        <div class="modal-overlay" v-if="modalVisible" @click="cerrarModal">
+            <div class="modal-content" @click.stop>
+                <button class="close-button" @click="cerrarModal">&times;</button>
+                <img :src="'https://image.tmdb.org/t/p/w300' + personaSeleccionada.profile_path" alt="Foto de {{ personaSeleccionada.name }}" class="modal-profile-pic">
+                <h3 class="modal-person-name">{{ personaSeleccionada.name }}</h3>
+                <p class="modal-details">Conocido por: {{ personaSeleccionada.known_for_department }}</p>
+                <ul class="modal-known-for">
+                    <li v-for="(item, index) in personaSeleccionada.known_for" :key="index">{{ item.title || item.name }}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</section>
+<script src="js/vue3.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
