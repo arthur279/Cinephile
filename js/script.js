@@ -23,9 +23,8 @@ const app = Vue.createApp({
             carrito: [],
             generos: [], 
             persona:[],
-            modalVisible: false,
-            personaSeleccionada: null, // Persona seleccionada para el modal
-            mostrarMas: false, // Controla si se expande la sección
+            grupoActual: 0,
+            personasPorGrupo: 8,
         };
     },
     methods: {
@@ -84,15 +83,18 @@ const app = Vue.createApp({
                 });
 
         },
-        LLamarPersona(){
+        LLamarPersona() {
             const API_KEY = '3b5e72388c7203c96df4caf933255a83';
             const URL = `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}`;
             axios.get(URL)
-                 .then((respuesta) => {
-                    this.persona = respuesta.data.results.splice(0,18);;  
-                    console.log(respuesta.data.results)
-                 })
-        },
+              .then((respuesta) => {
+                this.persona = respuesta.data.results.splice(0, 28).map(p => ({
+                  ...p,
+                  girada: false 
+                }));
+              })
+              .catch(error => console.error('Error al llamar a la API de personas:', error));
+          },  
         obtenerGeneros() {
             const API_KEY = '3b5e72388c7203c96df4caf933255a83';
             const URL = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
@@ -129,97 +131,87 @@ const app = Vue.createApp({
                 peli.title && peli.title.toUpperCase().includes(buscarUpper)
             );
         },
-        agregarCarrito(pelicula) {
+    agregarCarrito(pelicula) {
+    Swal.fire({
+        title: `¿Quieres agregar "${pelicula.title}" al carrito?`,
+        text: `Precio: $${pelicula.precio}`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: "Agregar",
+        cancelButtonText: "Cancelar",
+        customClass: {
+            popup: 'swal-dark-popup',
+            title: 'swal-dark-title',
+            content: 'swal-dark-content',
+            confirmButton: 'swal-dark-button',
+            cancelButton: 'swal-dark-cancel-button'
+        },
+        background: '#333',
+        color: '#fff',
+        iconColor: '#f8bb86'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+            const existe = carritoGuardado.find(item => item.id === pelicula.id);
+            if (existe) {
+                existe.cantidad++;
+            } else {
+                carritoGuardado.push({
+                    ...pelicula, 
+                    cantidad: 1 
+                });
+            }
+            localStorage.setItem('carrito', JSON.stringify(carritoGuardado));
             Swal.fire({
-                title: `¿Quieres agregar "${pelicula.title}" al carrito?`,
-                text: `Precio: $${pelicula.precio}`,
-                showDenyButton: true,
+                title: "¡Película agregada al carrito!",
+                text: `Has agregado "${pelicula.title}" por $${pelicula.precio}`,
+                icon: "success",
                 showCancelButton: true,
-                confirmButtonText: "Agregar",
-                denyButtonText: "No agregar",
+                confirmButtonText: "Ir al carrito",
+                cancelButtonText: "Seguir explorando",
                 customClass: {
                     popup: 'swal-dark-popup',
                     title: 'swal-dark-title',
                     content: 'swal-dark-content',
                     confirmButton: 'swal-dark-button',
-                    denyButton: 'swal-dark-cancel-button',
                     cancelButton: 'swal-dark-cancel-button'
                 },
                 background: '#333',
                 color: '#fff',
-                iconColor: '#f8bb86'
+                iconColor: '#a5dc86'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Recuperar el carrito desde localStorage
-                    let carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-        
-                    // Verificar si la película ya está en el carrito
-                    const existe = carritoGuardado.find(item => item.id === pelicula.id);
-        
-                    if (existe) {
-                        // Si ya existe, simplemente aumenta la cantidad
-                        existe.cantidad++;
-                    } else {
-                        // Si no existe, agrega la película al carrito con la cantidad inicial de 1
-                        carritoGuardado.push({
-                            ...pelicula, // Copia todos los datos de la película
-                            cantidad: 1 // Inicializa la cantidad en 1
-                        });
-                    }
-        
-                    // Guardar el carrito actualizado en localStorage
-                    localStorage.setItem('carrito', JSON.stringify(carritoGuardado));
-        
-                    // Segunda alerta confirmando la acción
-                    Swal.fire({
-                        title: "¡Película agregada al carrito!",
-                        text: `Has agregado "${pelicula.title}" por $${pelicula.precio}`,
-                        icon: "success",
-                        customClass: {
-                            popup: 'swal-dark-popup',
-                            title: 'swal-dark-title',
-                            content: 'swal-dark-content',
-                            confirmButton: 'swal-dark-button'
-                        },
-                        background: '#333',
-                        color: '#fff',
-                        iconColor: '#a5dc86'
-                    });
-                } else if (result.isDenied) {
-                    // Segunda alerta para la acción denegada
-                    Swal.fire({
-                        title: "Película no agregada",
-                        text: `No se agregó "${pelicula.title}" al carrito`,
-                        icon: "info",
-                        customClass: {
-                            popup: 'swal-dark-popup',
-                            title: 'swal-dark-title',
-                            content: 'swal-dark-content',
-                            confirmButton: 'swal-dark-button'
-                        },
-                        background: '#333',
-                        color: '#fff',
-                        iconColor: '#3fc3ee'
-                    });
+                    window.location.href = 'carrito.html'; 
                 }
             });
-        },   
+        } 
+    });
+},
         verDetalle(pelicula) {
             localStorage.setItem('productoSeleccionado', JSON.stringify(pelicula));
             localStorage.setItem('posicionScroll', window.scrollY);
             window.location.href = 'Detalles.html';
         },
-        abrirModal(persona) {
-            this.personaSeleccionada = persona;
-            this.modalVisible = true;
+        girarTarjeta(id) {
+            const persona = this.persona.find(p => p.id === id);
+            if (persona) {
+              persona.girada = !persona.girada; 
+            } else {
+              console.error(`Persona con id ${id} no encontrada`); 
+            }
           },
-          cerrarModal() {
-            this.modalVisible = false;
-            this.personaSeleccionada = null;
+          nextGrupo() {
+            const totalGrupos = Math.ceil(this.persona.length / this.personasPorGrupo);
+            if (this.grupoActual < totalGrupos - 1) {
+              this.grupoActual++;
+            }
           },
-          toggleVerMas() {
-            this.mostrarMas = !this.mostrarMas;
+          prevGrupo() {
+            if (this.grupoActual > 0) {
+              this.grupoActual--;
+            }
           },
+          
     },
     watch: {
         busqueda() {
@@ -247,8 +239,12 @@ const app = Vue.createApp({
             } else {
                 return 'bg-danger'; // Rojo
             }
-        }
-        
+        },
+        personasVisibles() {
+            const inicio = this.grupoActual * this.personasPorGrupo;
+            const fin = inicio + this.personasPorGrupo;
+            return this.persona.slice(inicio, fin);
+          },
     }
 });
 app.mount('#contenedor');

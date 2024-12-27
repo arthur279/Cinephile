@@ -4,6 +4,20 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/*Espaciado de la pagina*/
+section {
+    margin: 60px 0; 
+}
+
+.seccion-tendencias, #peliculas {
+    margin: 20px 0; 
+}
+.seccion-tendencias, #peliculas {
+    display: flex; 
+    align-items: center;
+}
+
+/*header*/
 header {
     background-color: #1E1E1E;
     color: #FFD700;
@@ -144,12 +158,12 @@ button:hover {
     margin: 0;
 }
 
+/*Sección de Peliculas*/
 #peliculas {
     position: relative;
     overflow: hidden;
 }
 
-/* Estilos generales para el contenedor */
 .peliculas-container {
     display: flex;
     overflow-x: auto;
@@ -224,20 +238,35 @@ button:hover {
     transform: scale(1.05);
 }
 
+
+/*Seccion de botones*/
+
+.titulo-tendencias {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #6a0dad;
+}
+
 .seccion-tendencias {
     text-align: center;
-    margin: 40px 0;
+    margin: 40px auto;
+    max-width: 800px;
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
 }
 
 .tendencias-buttons {
-    margin-bottom: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    gap: 10px;
     flex-wrap: wrap;
-    font-size: 16px;
-    padding: 10px 15px;
-    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 button {
@@ -245,10 +274,12 @@ button {
     color: white;
     border: none;
     border-radius: 20px;
-    padding: 10px 15px;
-    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 14px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s ease;
+    flex: 1 1 auto;
+    text-align: center;
 }
 
 button:hover {
@@ -256,30 +287,39 @@ button:hover {
 }
 
 .busqueda-container {
-    position: relative;
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .busqueda-input {
     border: 2px solid #6a0dad;
     border-radius: 20px;
-    padding: 10px 35px 10px 15px;
-    width: 200px;
+    padding: 10px 15px;
+    width: 250px;
     font-size: 14px;
-    margin-left: 10px;
 }
 
 .busqueda-icon {
-    position: absolute;
-    right: 10px;
-    width: 16px;
-    height: 16px;
-    opacity: 0.5;
-    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    margin-left: -40px;
+    cursor: pointer;
+    opacity: 0.7;
 }
 
+.genero-select {
+    border: 2px solid #6a0dad;
+    border-radius: 20px;
+    padding: 8px;
+    font-size: 14px;
+    color: #6a0dad;
+}
+
+
+/*Barra de progreso*/
 .progress {
     margin-top: 20px;
     width: 80%;
@@ -348,192 +388,226 @@ button:hover {
     background: #555;
 }
 
-.personas-populares { 
-    padding: 50px 20px;
-    text-align: center;
-    color: #fff;
-    background-color: #222;
+
+/*Sección de Personas Populares*/
+
+/* Título de la sección de personas */
+.seccion-personas .titulo {
+    font-size: 40px; /* Tamaño de fuente llamativo */
+    font-weight: bold; /* Negrita para resaltar */
+    color: #6a0dad; /* Color destacado */
+    text-align: center; /* Centrado */
+    margin-bottom: 50px; /* Espacio inferior */
+    position: relative; /* Para usar decoraciones */
+    
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Manteniendo el tamaño original */
-    gap: 20px; /* Espacio entre tarjetas */
-    max-height: 400px;
-    overflow: hidden;
-    position: relative;
-    transition: max-height 0.5s ease;
-    padding: 0 10px; /* Añadir relleno lateral para reducir espacio */
-}
-
-.grid-container::after {
+/* Decoración debajo del título */
+.seccion-personas .titulo::after {
     content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background: linear-gradient(to top, #222, transparent);
-    pointer-events: none;
+    display: block;
+    width: 100px; /* Ancho de la línea decorativa */
+    height: 3px; /* Altura de la línea */
+    background: linear-gradient(90deg, #6a0dad, #1e90ff); /* Efecto degradado */
+    margin: 10px auto 0; /* Centrado y separación */
+    border-radius: 3px; /* Bordes redondeados */
 }
 
-.grid-container.expand {
-    max-height: none;
+.seccion-personas-wrapper {
+    background-color: #18171c; /* Color de fondo para toda la sección */
+    padding: 40px 0; /* Espaciado superior e inferior */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho */
 }
 
-.grid-container.expand::after {
-    display: none;
-}
-
-.toggle-button-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.toggle-button {
-    background-color: #444;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.toggle-button:hover {
-    background-color: #555;
-}
-
-.card {
-    background-color: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Manteniendo el espacio entre tarjetas */
-    margin: 0; /* Eliminando el margen del contenedor */
-    padding: 20px; /* Relleno de 20px */
-    justify-content: center;
-}
-
-.profile-pic {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.person-name {
-    font-size: 1rem;
-    margin: 10px 0;
-}
-
-.details-button {
-    background-color: #e50914;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px 0;
-}
-
-.details-button:hover {
-    background-color: #bf0810;
+.seccion-personas {
+    max-width: 1200px; /* Máxima anchura para el contenido interno */
+    margin: 0 auto; /* Centra el contenido interno */
+    padding: 20px; /* Espaciado interno del contenido */
+    text-align: center; /* Centrar texto dentro del contenedor */
+    margin-top: 80px;
 }
 
 
-.modal-overlay {
-    position: fixed;
+.personas-grid {
+    display: grid; /* Usa un diseño de cuadrícula */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajusta el número de columnas según el tamaño */
+    gap: 20px; /* Espacio entre las tarjetas */
+    justify-items: center; /* Centra las tarjetas en la cuadrícula */
+}
+
+.tarjeta {
+    width: 250px; /* Ancho fijo para las tarjetas */
+    height: 250px; /* Altura fija para las tarjetas, ajustada a un formato circular */
+    perspective: 1000px; /* Agrega perspectiva para el efecto 3D */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    border-radius: 50%; /* Hace que la tarjeta sea circular */
+    overflow: hidden; /* Oculta el contenido que sale del borde */
+    position: relative; /* Permite posicionar las caras dentro de la tarjeta */
+}
+
+.cara {
+    position: absolute; /* Posicionamiento absoluto para superponer las caras */
     top: 0;
     left: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    transition: transform 0.6s; /* Transición suave al girar */
+    transform-style: preserve-3d; /* Mantiene el estilo 3D al girar */
+}
+
+.cara.girada {
+    transform: rotateY(180deg); /* Gira la tarjeta al hacer clic */
+}
+
+.frontal, .trasera {
+    position: absolute; /* Posicionamiento absoluto para superponer las caras */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    backface-visibility: hidden; /* Oculta la cara opuesta al girar */
+    border-radius: 50%; /* Hace que las caras también sean circulares */
+    overflow: hidden; /* Oculta el contenido que sale del borde */
+}
+
+.frontal img {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    object-fit: cover; /* Asegura que la imagen llene el espacio */
+    border-radius: 50%; /* Asegura que la imagen tenga bordes circulares */
 }
 
-.modal-content {
-    background-color: #121212;
-    border-radius: 10px;
-    padding: 20px;
-    width: 80%;
-    max-width: 600px;
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease-in-out;
+.trasera {
+    display: flex; /* Usa flexbox para centrar el contenido */
+    flex-direction: column; /* Alinea el contenido verticalmente */
+    justify-content: center; /* Centra verticalmente el contenido */
+    align-items: center; /* Centra horizontalmente el contenido */
+    background-color: #343a40; /* Fondo oscuro para la parte de atrás */
+    color: white; /* Texto blanco para contraste */
+    padding: 10px; /* Espacio interno */
+    transform: rotateY(180deg); /* Gira la parte de atrás para que esté oculta inicialmente */
 }
 
-.modal-profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto 20px;
+/* Botones del carrusel */
+.carrusel-btn {
+  background-color: transparent; /* Fondo transparente */
+  color: white; /* Solo las flechas blancas */
+  border: none; /* Sin borde */
+  width: 60px; /* Botón más largo */
+  height: 60px; /* Botón más largo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px; /* Tamaño de las flechas */
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 50%; /* Centrado verticalmente */
+  transform: translateY(-50%);
+  z-index: 1000; /* Asegúrate de que estén visibles */
+  visibility: visible; /* Asegúrate de que no estén ocultos */
 }
 
-.modal-person-name {
-    font-size: 1.5rem;
+.carrusel-btn.prev {
+  left: -20px; /* Más hacia el costado izquierdo */
+}
+
+.carrusel-btn.next {
+  right: -20px; /* Más hacia el costado derecho */
+}
+
+.carrusel-btn:hover {
+  color: #6a0dad; /* Cambia el color al pasar el cursor */
+}
+
+/* Asegura que el contenedor del carrusel esté posicionado correctamente */
+.personas-article {
+  position: relative; /* Necesario para posicionar los botones dentro del contenedor */
+}
+
+/* Transición más fluida para el carrusel */
+.personas-grid {
+  display: grid; /* Mantén la cuadrícula original */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajuste original */
+  gap: 20px; /* Espacio entre tarjetas */
+  justify-items: center; /* Centra las tarjetas en la cuadrícula */
+  transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1); /* Animación fluida */
+}
+
+.personas-grid-wrapper {
+  overflow: hidden; /* Oculta los elementos fuera del contenedor */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  position: relative; /* Permite posicionar elementos dentro */
+}
+
+  
+  
+  
+
+
+
+/*Footer*/
+footer {
+    background-color: #191919; /* Fondo oscuro */
+    color: #f4f4f4; /* Texto claro para contraste */
+    padding: 40px 20px; /* Espaciado */
+    text-align: center; /* Centrar contenido */
+}
+
+footer .contenedor-footer {
+    max-width: 1200px;
+    margin: 0 auto; /* Centrar el contenido horizontalmente */
+}
+
+footer .logo-footer {
+    font-size: 50px; /* Tamaño del ícono */
+    color: #1e90ff; /* Color del ícono */
+    margin-bottom: 15px; /* Espaciado debajo del logo */
+}
+
+footer h4 {
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px;
-    color: #6a5acd;
+    margin-bottom: 10px; /* Espaciado */
 }
 
-.modal-details {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    color: #bbb;
+footer .social__icons {
+    margin: 15px 0; /* Espaciado alrededor de los iconos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Separación entre los iconos */
 }
 
-.modal-known-for {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    font-size: 1rem;
+footer .social__icons span {
+    width: 40px; /* Dimensiones uniformes */
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e90ff; /* Fondo del ícono */
+    border-radius: 50%; /* Forma circular */
+    transition: transform 0.3s, background-color 0.3s;
 }
 
-.modal-known-for li {
-    margin-bottom: 10px;
+footer .social__icons span:hover {
+    transform: scale(1.1); /* Efecto de agrandar al pasar el mouse */
+    background-color: #6a0dad; /* Cambio de color en hover */
 }
 
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: #fff;
-    cursor: pointer;
-    transition: color 0.3s;
+footer .social__icons i {
+    font-size: 24px; /* Tamaño del ícono */
+    color: #fff; /* Color blanco para el ícono */
 }
 
-.modal-content {
-    transform: scale(0.9);
-    opacity: 0;
-    animation: modal-fade-in 0.5s forwards;
+footer p {
+    font-size: 14px; /* Tamaño de texto */
+    line-height: 1.5; /* Mejor legibilidad */
+    margin-top: 20px; /* Separación superior */
 }
 
-@keyframes modal-fade-in {
-    0% {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+footer .titulo-final {
+    font-size: 14px;
+    margin-top: 20px;
+    color: #888; /* Texto tenue */
 }
